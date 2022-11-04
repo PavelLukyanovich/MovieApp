@@ -6,7 +6,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Application;
 import android.os.Bundle;
+import android.text.Editable;
 import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -26,16 +29,21 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    EditText movieTitle;
+
     private RecyclerView recyclerView;
     private MovieAdapter movieAdapter;
     private ArrayList<Movie> movies;
     private RequestQueue requestQueue;
+    private String url = "http://www.omdbapi.com/?apikey=998b1e64&s=";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        movieTitle = findViewById(R.id.movieTitleEditText);
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.hasFixedSize();
@@ -49,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void getMovies() {
 
-        String url = "http://www.omdbapi.com/?apikey=998b1e64&s=american_pie";
+
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -89,4 +97,20 @@ public class MainActivity extends AppCompatActivity {
         });
         requestQueue.add(request);
     }
+
+    public void search(View view) {
+
+        String addMovieTitle = movieTitle.getText().toString();
+        Log.d("add", addMovieTitle);
+        String addMovieTitleLC = addMovieTitle.toLowerCase();
+        Log.d("addToLC", addMovieTitle);
+        String addMovieTitleLCR = addMovieTitleLC.replace(" ", "_");
+        Log.d("addRepl", addMovieTitle);
+                url = url + addMovieTitleLCR;
+                Log.d("NewUrl: ", url);
+                getMovies();
+                url = "http://www.omdbapi.com/?apikey=998b1e64&s=";
+                movies.clear();
+
+            }
 }
