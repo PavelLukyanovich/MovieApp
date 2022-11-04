@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void getMovies() {
 
-        String url = "http://www.omdbapi.com/?apikey=998b1e64&s=duna";
+        String url = "http://www.omdbapi.com/?apikey=998b1e64&s=american_pie";
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {

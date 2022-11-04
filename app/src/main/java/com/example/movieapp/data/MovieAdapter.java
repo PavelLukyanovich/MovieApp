@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
     private Context context;
-    private ArrayList movies;
+    private ArrayList<Movie> movies;
 
     public MovieAdapter (Context context, ArrayList movies) {
         this.context = context;
@@ -38,7 +38,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
-        Movie currentMovie = (Movie) movies.get(position);
+        Movie currentMovie = movies.get(position);
 
         String title = currentMovie.getTitle();
         String year = currentMovie.getYear();
@@ -48,8 +48,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         holder.titleTextView.setText(title);
         holder.yearTextView.setText(year);
         Picasso.get().load(posterUrl).fit().centerInside().into(holder.posterImageView);
-        Log.d("Picasso: ",
-                Picasso.get().load(posterUrl).fit().centerInside().into(holder.posterImageView);
 
     }
 
